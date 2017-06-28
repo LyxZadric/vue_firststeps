@@ -3,27 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title>Quantity component</title>
-
   </head>
   <body>
 
-  <div class="main">
+  <div id="main">
     <quantity></quantity>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
+  <script src="https://unpkg.com/vue@2.3.3"></script>
   <script>
-    var demo = new Vue({
-      el: "#main"
-    });
 
-    Vue.component('quantity', {
-      template:`
-        <button>+</button>
-          <input type="number" name="quantite" min="0" max="1000"/>
-        <button>-</button>
-      `
-    });
+  Vue.component('quantity', {
+    template:`
+    <form>
+      <button type="button" @click="increment()">+</button>
+        <input type="number" name="quantite" v-bind:value="nombre" readonly/>
+      <button type="button" @click="decrement()">-</button>
+   </form>
+    `,
+
+    data(){
+      return{
+        nombre : 1
+      }
+    },
+
+    methods:{
+      increment : function(){
+        this.nombre += 1;
+
+      },
+
+      decrement : function(){
+        if(!this.nombre - 1 < 0){
+          this.nombre -= 1;
+        }
+
+      }
+    }
+  });
+
+  var demo = new Vue({
+    el: "#main"
+  });
 
 
 
